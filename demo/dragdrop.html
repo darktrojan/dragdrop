@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Drag Drop</title>
+<style type="text/css">
+html {
+	height: 100%;
+}
+body {
+	background-image: url(checker.png);
+	height: 150%;
+}
+#t {
+	background: #00f;
+}
+#t {
+	position: absolute;
+	background-color: rgba(0, 0, 255, 0.75);
+	font-family: arial;
+	font-size: 70px;
+}
+#t.fixed {
+	position: fixed;
+	background-color: rgba(0, 255, 0, 0.75);
+}
+</style>
+</head>
+
+<body>
+<div id="t">drag me</div>
+<button onclick="toggleFixed ();">Toggle fixed</button>
+<script src="../dragdrop.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+var t = document.getElementById ('t');
+var d = new DraggableObject (t);
+d.customMouseMove = function (event) {
+	var left = event.pageX - this.dragStartX;
+	var top = event.pageY - this.dragStartY;
+
+	this.domNode.style.left = left + 'px';
+	this.domNode.style.top = top + 'px';
+	
+	t.innerHTML = left + ', ' + top + ' [' + (document.documentElement.scrollTop + document.body.scrollTop) + ']';
+}
+
+function toggleFixed () {
+	if (t.className == 'fixed') {
+		t.className = '';
+		d.fixed = false;
+	} else {
+		t.className = 'fixed';
+		d.fixed = true;
+	}
+}
+
+</script>
+</body>
+
+</html>
