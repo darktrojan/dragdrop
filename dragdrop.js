@@ -1,13 +1,7 @@
 function DraggableObject(domNode, fixed) {
-	this.domNode = domNode;
-	this.domNode.draggableObject = this;
-	this.lastMove = 0;
-	this.fixed = !!fixed;
-	this.threshold = 5;
-	this.enabled = true;
-
-	var self = this;
-	this.domNode.onmousedown = function(event) { if (self.enabled) { self.mouseDown(event); } };
+	if (!!domNode) {
+		this.init(domNode, fixed);
+	}
 }
 
 DraggableObject.fixEvent = function(event) {
@@ -51,6 +45,18 @@ DraggableObject.fixBCR = function(tag, fixed) {
 };
 
 DraggableObject.prototype = {
+	lastMove: 0,
+	threshold: 5,
+	enabled: true,
+
+	init: function(domNode, fixed) {
+		this.domNode = domNode;
+		this.fixed = !!fixed;
+		this.domNode.draggableObject = this;
+		var self = this;
+		this.domNode.onmousedown = function(event) { if (self.enabled) { self.mouseDown(event); } };
+	},
+
 	mouseDown: function(event) {
 		event = DraggableObject.fixEvent(event);
 
