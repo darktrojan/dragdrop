@@ -22,7 +22,6 @@ DraggableObject.fixEvent = function(event) {
 };
 
 DraggableObject.fixBCR = function(tag, fixed) {
-	// see also calendar.js
 	var bcr = tag.getBoundingClientRect();
 	if (/MSIE [67]\.0/.test(navigator.userAgent)) {
 		bcr.left -= 2;
